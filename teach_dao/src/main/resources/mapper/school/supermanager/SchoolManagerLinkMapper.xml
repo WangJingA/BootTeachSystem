@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.teach.dao.school.supermanager.SchoolManagerLinkMapper">
+    <insert id="addSchoolManagerLink" parameterType="com.boot.teach.model.manager.TeachSchoolManage">
+        INSERT INTO teach_school_manage ( uuid, school_uid, school_manager_uid, create_time, update_time ) VALUES
+            (#{uuid},#{schoolUid},#{schoolManagerUid},#{createTime},#{updateTime})
+    </insert>
+</mapper>

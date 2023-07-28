@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.teach.dao.manager.ManagerSchoolInfoMapper">
+
+    <insert id="schoolImage" parameterType="com.boot.teach.model.school.SchoolImage">
+        insert into school_images (uuid,school_uid,image_url,create_time,update_time)
+        values (#{uuid},#{schoolUid},#{imageUrl},#{createTime},#{updateTime})
+    </insert>
+    <update id="updateImage" parameterType="com.boot.teach.model.school.SchoolImage">
+        update school_images set
+               uuid=#{uuid},school_uid=#{schoolUid},image_url=#{imageUrl},create_time=#{createTime},update_time=#{updateTime}
+            where school_uid = #{schoolUid}
+    </update>
+    <delete id="deleteImages">
+        delete from school_images
+        where uuid = #{uuid}
+    </delete>
+    <select id="selectImages" resultType="com.boot.teach.model.school.SchoolImage">
+        select uuid,school_uid,image_url,create_time,update_time
+        from school_images
+        where school_uid = #{schoolUid}
+    </select>
+    <select id="existImage" resultType="com.boot.teach.model.school.SchoolImage">
+        select uuid,school_uid,image_url,create_time,update_time
+        from school_images
+        where school_uid = #{schoolUid}
+    </select>
+</mapper>

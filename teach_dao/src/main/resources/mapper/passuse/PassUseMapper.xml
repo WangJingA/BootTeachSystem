@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.teach.dao.passuse.PassUseMapper">
+
+    <select id="schoolList" resultType="com.boot.teach.model.school.TeachSchool">
+        select uuid,school_name from teach_school
+    </select>
+    <select id="depList" resultType="com.boot.teach.model.school.TeachDepartment">
+        select uuid,department_name from teach_department
+        where school_uid = #{schoolUid}
+    </select>
+    <select id="majorList" resultType="com.boot.teach.model.school.TeachMajor">
+        select uuid,major_name from teach_major
+        where department_uid = #{departmentUid}
+    </select>
+    <select id="classList" resultType="com.boot.teach.model.school.TeachClass">
+        select uuid,class_name from teach_class
+        where class_major = #{majorUid}
+    </select>
+</mapper>

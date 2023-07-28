@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.teach.dao.school.supermanager.SchooManagerlListMapper">
+
+    <select id="listSchoolManager" resultMap="schoolManagersList" parameterType="com.boot.teach.dto.school.supermanager.ListManagerDTO">
+        select tm.uuid,
+               tm.teach_manager,
+               tm.teach_manager_phone,
+               tm.teach_manager_mail,
+               tm.teach_manager_account,
+               tm.teach_manager_password,
+               tm.teach_manager_status,
+               tm.create_time,
+               tm.update_time,
+               ts.uuid,
+               ts.school_name,
+               ts.school_address,
+               ts.school_introduction,
+               ts.school_icon,
+               ts.create_time
+               from teach_school_manage tsm left join teach_manager tm on tm.uuid = tsm.school_manager_uid
+                left join teach_school ts on tsm.school_uid = ts.uuid where 1=1
+                <choose>
+                    <when test="schoolUid != '' &amp; schoolUid != null">
+                       and ts.uuid = #{schoolUid}
+                    </when>
+                    <when test="managerName != '' &amp; managerName != null">
+                      and  tm.teach_manager like concat('%',#{managerName},'%')
+                    </when>
+                    <when test="uuid != '' &amp; uuid != null">
+                        and tm.uuid = #{uuid}
+                    </when>
+                </choose>
+    </select>
+    <resultMap id="schoolManagersList" type="com.boot.teach.model.school.TeachSchoolManagerList">
+        <result property="uuid" column="uuid"></result>
+        <result property="schoolName" column="school_name"></result>
+        <result property="schoolAddress" column="school_address"></result>
+        <result property="schoolIcon" column="school_icon"></result>
+        <result property="schoolIntroduction" column="school_introduction"></result>
+        <result property="createTime" column="create_time"></result>
+        <collection property="managerList" ofType="com.boot.teach.model.manager.TeachManager">
+            <id property="uuid" column="uuid"></id>
+            <result property="teachManager" column="teach_manager"></result>
+            <result property="teachManagerAccount" column="teach_manager_account"></result>
+            <result property="teachManagerPassword" column="teach_manager_password"></result>
+            <result property="teachManagerPhone" column="teach_manager_phone"></result>
+            <result property="teachManagerMail" column="teach_manager_mail"></result>
+            <result property="teachManagerStatus" column="teach_manager_status"></result>
+            <result property="createTime" column="create_time"></result>
+            <result property="updateTime" column="update_time"></result>
+        </collection>
+    </resultMap>
+</mapper>

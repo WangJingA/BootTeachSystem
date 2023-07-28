@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.teach.dao.school.supermanager.SchoolManagerMapper">
+    <insert id="addSchoolManager" parameterType="com.boot.teach.model.school.supermanager.TeachAddSchoolManage">
+        insert into teach_manager (uuid,teach_manager,teach_manager_phone,
+                                   teach_manager_mail,teach_manager_password,
+                                   teach_manager_account)
+        values(#{uuid},#{teachManager},#{teachManagerPhone},#{teachManagerMail},#{teachManagerPassword},#{teachManagerAccount})
+    </insert>
+    <insert id="addSchoolManagerLink" parameterType="com.boot.teach.model.manager.TeachSchoolManage">
+        insert into teach_school_manage(uuid,school_uid,school_manager_uid,update_time,create_time)
+        values
+            (#{uuid},#{schoolUid},#{schoolManagerUid},#{updateTime},#{createTime})
+    </insert>
+
+    <select id="managerSchoolList" resultType="map">
+        select uuid,distinct(school_name) from teach_school
+    </select>
+    <select id="listTeachManagers" resultType="com.boot.teach.model.school.TeachSchool" parameterType="com.boot.teach.dto.school.supermanager.ListManagerDTO">
+        select tm.uuid,tm.teach_manager,tm.teach_manager_phone,
+               tm.teach_manager_mail,tm.teach_manager_status,tm.create_time,tm.update_time,
+               ts.school_name,ts.school_address,ts.school_introduction,ts.school_icon
+               from teach_school_manage tsm left join teach_manage tm on tm.uuid = tsm.school_manager_uid
+                left join teach_school ts on tsm.school_uid = ts.uuid
+                <where>
+                    <if test="uuid != null">
+                        tm.uuid = #{uuid}
+                    </if>
+                    <if test="managerName != null">
+                        tm.teach_manager like concat('%',#{managerName},'%')
+                    </if>
+                    <if test="schoolUid != null">
+                        ts.uuid = #{schoolUid}
+                    </if>
+                    <if test="pageIndex != null &amp; pageSize != null">
+                        limit (#{pageIndex}-1)*#{pageSize},#{pageSize}
+                    </if>
+                </where>
+    </select>
+</mapper>
