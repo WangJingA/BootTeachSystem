@@ -89,6 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/manager/delMajor").hasAnyAuthority("MajorList.del")
                 .antMatchers(HttpMethod.POST,"/manager/listMajor").hasAnyAuthority("MajorList.query")
                 .antMatchers(HttpMethod.POST,"/manager/addMajor").hasAnyAuthority("MajorCreate.create")
+                .antMatchers(HttpMethod.POST,"/manager/createClass").hasAnyAuthority("ClassCreate.create")
                 .antMatchers(HttpMethod.POST,"/passUse/schoolList").hasAnyAuthority("PassUse.school.list")
                 .antMatchers(HttpMethod.POST,"/passUse/uploadIcon").hasAnyAuthority("PassUse.file.upload")
                 .antMatchers(HttpMethod.POST,"/passUse/distinctDep").hasAnyAuthority("PassUse.department.list")
