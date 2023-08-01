@@ -3,7 +3,7 @@ package com.boot.teach.common.config;
 import com.boot.teach.common.util.JWTUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.rmi.CORBA.Util;
+
 import java.util.UUID;
 
 public class main {

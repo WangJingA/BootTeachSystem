@@ -1,6 +1,5 @@
 package com.boot.teach.common.config.security;
 
-
 import com.boot.teach.common.exception.AccessDeniedHandlerImpl;
 import com.boot.teach.common.exception.AuthenticationEntryPointImpl;
 import com.boot.teach.common.filters.JwtAuthenticationFilter;
@@ -13,11 +12,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 
 @Configuration
 @EnableWebSecurity
@@ -59,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-resources/**");
     }
 
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf()
@@ -67,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //表单提交disable
                 .formLogin().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         http
                 .authorizeRequests()
                 //放行的请求配置，不需要经过验证
@@ -95,6 +96,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/passUse/distinctDep").hasAnyAuthority("PassUse.department.list")
                 .antMatchers(HttpMethod.POST,"/passUse/classList").hasAnyAuthority("PassUse.class.list")
                 .antMatchers(HttpMethod.POST,"/passUse/majorList").hasAnyAuthority("PassUse.major.list")
+                .antMatchers(HttpMethod.POST,"/manage/listClass").hasAnyAuthority("classList.list")
+                .antMatchers(HttpMethod.POST,"/manage/editClass").hasAnyAuthority("ClassList.update")
+                .antMatchers(HttpMethod.POST,"/manage/delClass").hasAnyAuthority("ClassList.del")
                 .anyRequest()
                 .authenticated();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

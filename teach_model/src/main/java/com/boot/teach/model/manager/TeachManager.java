@@ -3,12 +3,14 @@ package com.boot.teach.model.manager;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import nonapi.io.github.classgraph.json.Id;
 
 import java.util.Date;
 
 @Data
 @ApiModel("管理员")
 public class  TeachManager {
+    @Id
     @ApiModelProperty("uuid")
     String uuid;
 

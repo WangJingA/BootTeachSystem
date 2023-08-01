@@ -3,7 +3,9 @@ package com.boot.teach.service.manager;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.boot.teach.common.response.ServerResponseEntity;
 import com.boot.teach.dto.manager.CreateClassDTO;
+import com.boot.teach.dto.manager.EditClassDTO;
 import com.boot.teach.model.school.TeachClass;
+import com.boot.teach.vo.manager.manager.QueryClassVO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +17,10 @@ import org.springframework.stereotype.Service;
 public interface ClassManageService extends IService<TeachClass> {
     ServerResponseEntity createClass(CreateClassDTO createClassDTO);
 
-    ServerResponseEntity classList();
+    ServerResponseEntity classList(QueryClassVO queryClassVO);
+
+    ServerResponseEntity classEdit(EditClassDTO editClassDTO) throws Exception;
+
+    ServerResponseEntity delClass(String uuid);
 
 }

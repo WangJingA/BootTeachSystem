@@ -7,4 +7,8 @@ public class QueryClassVO {
     String uuid;
     String clazzName;
     String major;
+    String dep;
+    String school;
+    int page;
+    int pageSize;
 }

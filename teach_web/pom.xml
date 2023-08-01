@@ -46,6 +46,7 @@
             <version>2.3.7.RELEASE</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
