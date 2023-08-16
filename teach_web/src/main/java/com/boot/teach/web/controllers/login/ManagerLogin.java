@@ -3,6 +3,7 @@ package com.boot.teach.web.controllers.login;
 import com.boot.teach.common.annotations.RequestLock;
 import com.boot.teach.common.constance.ExceptionMessageConstance;
 import com.boot.teach.common.exception.CaptchaException;
+import com.boot.teach.common.response.ResponseEnum;
 import com.boot.teach.common.response.ServerResponseEntity;
 import com.boot.teach.dto.auth.LoginDTO;
 import com.boot.teach.dto.auth.UserDto;
@@ -46,7 +47,7 @@ public class ManagerLogin {
         HttpSession session = request.getSession();
         String superManagerCaptcha = (String) session.getAttribute("managerCaptcha");
         if (!loginVO.getCheckCode().equalsIgnoreCase(superManagerCaptcha)){
-            throw new CaptchaException(ExceptionMessageConstance.CAPTCHA_ERROR);
+            return ServerResponseEntity.fail(ResponseEnum.CAPTCHA_EXCEPTION,"验证码错误");
         }
         mapperFactory.classMap(UserDto.class, UserVo.class);
         LoginDTO loginDTO = mapperFactory.getMapperFacade().map(loginVO, LoginDTO.class);

@@ -99,6 +99,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/manage/listClass").hasAnyAuthority("classList.list")
                 .antMatchers(HttpMethod.POST,"/manage/editClass").hasAnyAuthority("ClassList.update")
                 .antMatchers(HttpMethod.POST,"/manage/delClass").hasAnyAuthority("ClassList.del")
+                .antMatchers(HttpMethod.POST,"/manage/importStuList").hasAnyAuthority("StudentManage.import")
+                .antMatchers(HttpMethod.POST,"/manage/exportStuList").hasAnyAuthority("StudentManage.export")
                 .anyRequest()
                 .authenticated();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

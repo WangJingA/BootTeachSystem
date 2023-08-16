@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boot.teach.dao.manager.StudentManageMapper">
+
+    <insert id="inserStuBath" parameterType="list">
+        insert into teach_sudent (
+            uuid,
+            sudent_name,
+            sudent_school_number,
+            sudent_class,
+            sudent_major,
+            sudent_department,
+            sudent_college,
+            sudent_mail,
+            sudent_phone,
+            sudent_accout,
+            sudent_password,
+            sudent_sex,
+            create_time,
+            update_time
+        )values
+             <foreach collection="list" item="stu" separator="," index="">
+                (
+                 #{stu.uuid},
+                 #{stu.sudentName},
+                 #{stu.sudentSchoolNumber},
+                 #{stu.sudentClass},
+                 #{stu.sudentMajor},
+                 #{stu.sudentDepartment},
+                 #{stu.sudentCollege},
+                 #{stu.sudentMail},
+                 #{stu.sudentPhone},
+                 #{stu.sudentAccout},
+                 #{stu.sudentPassword},
+                 #{stu.sudentSex},
+                 #{stu.createTime},
+                 #{stu.updateTime}
+                 )
+             </foreach>
+    </insert>
+    <insert id="insertUsBath" parameterType="list">
+        insert into teach_user (
+        uuid,
+        user_account,
+        user_password,
+        user_email,
+        user_phone,
+        user_status,
+        create_time,
+        update_time
+        )values
+        <foreach collection="list" item="user" separator="," index="">
+            (
+                #{user.uuid},
+                #{user.userAccount},
+                #{user.userPassword},
+                #{user.userEmail},
+                #{user.userPhone},
+                #{user.userStatus},
+                #{user.createTime},
+                #{user.updateTime}
+            )
+        </foreach>
+    </insert>
+    <select id="getSchoolUid" resultType="string">
+        select school_uid from teach_user tu left join  teach_school_manage tsm
+        on tu.uuid = tsm.uuid
+        where tu.uuid = #{userUid}
+    </select>
+</mapper>

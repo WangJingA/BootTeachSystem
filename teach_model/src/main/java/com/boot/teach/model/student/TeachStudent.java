@@ -12,17 +12,26 @@ public class TeachStudent {
     @ApiModelProperty(value = "uuid")
     String uuid;
 
-    @ApiModelProperty(value = "学生姓名")
+    @ApiModelProperty(value = "姓名")
     String sudentName;
 
     @ApiModelProperty(value = "学号")
     String sudentSchoolNumber;
 
-    @ApiModelProperty(value = "学生班级")
+    @ApiModelProperty(value = "班级")
     String sudentClass;
+
+    @ApiModelProperty(value = "学校")
+    String sudentCollege;
+
+    @ApiModelProperty(value = "性别")
+    String sudentSex;
 
     @ApiModelProperty(value = "专业")
     String sudentMajor;
+
+    @ApiModelProperty(value = "学院")
+    String sudentDepartment;
 
     @ApiModelProperty(value = "手机号")
     String sudentPhone;
@@ -30,26 +39,16 @@ public class TeachStudent {
     @ApiModelProperty(value = "邮箱")
     String sudentMail;
 
-    @ApiModelProperty(value = "学校")
-    String sudentCollege;
-
-    @ApiModelProperty(value = "学院")
-    String sudentDepartment;
 
     @ApiModelProperty(value = "头像")
     String sudentIcon;
 
     @ApiModelProperty(value = "账号")
-    String sudentAccount;
+    String sudentAccout;
 
-    @ApiModelProperty(value = "密码，采用加密")
+    @ApiModelProperty(value = "密码")
     String sudentPassword;
 
-    @ApiModelProperty(value = "性别")
-    String sudentSex;
-
-    @ApiModelProperty(value = "班级名")
-    String className;
 
     @ApiModelProperty(value = "创建时间")
     Date createTime;
